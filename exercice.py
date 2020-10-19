@@ -16,17 +16,15 @@ def ellipsoide(a = 1, b = 1, c = 1, p = 1)->tuple:
     return (volume, volume * p)
 
 def rec_tree(dist, angle, size):
-    pensize(size)
-    forward(dist)
-    if(dist <= 10):
+    if dist > 0 and size > 0:
+        pensize(size)
+        forward(dist)
+        left(angle)
+        rec_tree(dist - 10, angle - 5, size - 1)
+        right(angle * 2)
+        rec_tree(dist - 10, angle - 5, size - 1)
+        left(angle)
         backward(dist)
-        return None
-    left(angle)
-    rec_tree(dist - 10, angle - 5, size - 1)
-    right(angle * 2)
-    rec_tree(dist - 10, angle - 5, size - 1)
-    left(angle)
-    backward(dist)
 
 
 
@@ -35,9 +33,7 @@ def tree():
     setheading(90)
     color('green')
     begin_fill()
-
     rec_tree(70, 35, 7)
-
     end_fill()
     done()
 
